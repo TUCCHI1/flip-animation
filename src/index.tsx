@@ -5,8 +5,12 @@ const app = new Hono()
 
 app.use(renderer)
 
-app.get('/', (c) => {
-  return c.render(<h1>Hello!</h1>)
+app.get("/api/clock", (c) => {
+  return c.json({
+    time: new Date().toLocaleDateString()
+  })
 })
+
+app.get("*", (c) => ww)
 
 export default app
