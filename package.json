@@ -1,11 +1,11 @@
 {
-  "name": "flip-animation",
+  "name": "my-spa-template",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "vite dev",
+    "build": "vite build --mode client && vite build",
     "preview": "wrangler pages dev",
-    "deploy": "$npm_execpath run build && wrangler pages deploy"
+    "deploy": "wrangler pages deploy dist"
   },
   "dependencies": {
     "hono": "^4.6.1"
