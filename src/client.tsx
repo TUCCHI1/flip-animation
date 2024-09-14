@@ -16,7 +16,7 @@ function App() {
 
 function Counter() {
   const [count, setCount] = useState(0)
-  return <button onClick={() => setCount(count + 1)}>You clicked me {count} times</button>
+  return <button type="button" onClick={() => setCount(count + 1)}>You clicked me {count} times</button>
 }
 
 const ClockButton = () => {
@@ -25,10 +25,10 @@ const ClockButton = () => {
   const handleClick = async () => {
     const response = await fetch("api/clock")
     const data = await response.json()
-    const headers = Array.from(response.headers.entries()).reduce((acc, [key, value]) => ({
-      ...acc,
-      [key]: value,
-    }), {})
+    const headers = Array.from(response.headers.entries()).reduce((acc: { [key: string]: string }, [key, value]) => {
+      acc[key] = value;
+      return acc;
+    }, {})
     const fullResponse = {
       url: response.url,
       status: response.status,
@@ -40,12 +40,16 @@ const ClockButton = () => {
 
   return (
     <>
-      <button onClick={handleClick}>Get Server Time</button>
+      <button type="button" onClick={handleClick}>Get Server Time</button>
       <pre>{response}</pre>
     </>
   )
 }
 
-const domNode = document.getElementById("root")!
-const root = createRoot(domNode)
-root.render(<App />)
+const domNode = document.getElementById("root")
+if (domNode) {
+  const root = createRoot(domNode)
+  root.render(<App />)
+} else {
+  console.error("Root element not found")
+}
